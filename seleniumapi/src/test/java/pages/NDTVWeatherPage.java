@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import utils.ActionUtil;
 
@@ -9,9 +10,11 @@ public class NDTVWeatherPage extends ActionUtil{
 
 	WebDriver driver;
 
-	By logoWeather = By.id("Logo");
+	By logoWeather = By.id("logo");
 	By searchCity = By.id("searchBox");
 	By selectCity;
+	By tempCelsius;
+	By tempFahrenheit;
 
 	public NDTVWeatherPage (WebDriver driver){
 		super(driver);
@@ -23,18 +26,33 @@ public class NDTVWeatherPage extends ActionUtil{
 		isElementVisible(logoWeather);
 	}
 
-	public void searchCity(String city){
-
+	public void searchAndSelectCity(String city){
+		WebElement element = null;
 		isElementClickable(searchCity).sendKeys(city);
-
-	}
-
-	public void selectCity(String city){
 		if(city != null)
 			selectCity = By.id(city);
-		if(!isElementClickable(searchCity).isSelected())
-			isElementClickable(searchCity).click();
-	
+		element = isElementClickable(selectCity);
+		if(!element.isSelected())
+			element.click();
 	}
+	
+	public String getTempCelsius(String city){
+		String tempCelsiusPath = "//div[@title='" + city + "']/div/span[@class='tempRedText']";
+		String celsius = null;
+		tempCelsius = By.xpath(tempCelsiusPath);
+		celsius = isElementVisible(tempCelsius).getText();
+		
+		return celsius;
+	}
+	
+	public String getTempFahrenheit(String city){
+		String tempFahrenheitPath = "//div[@title='" + city + "']/div/span[@class='tempWhiteText']";
+		String fahrenheit = null;
+		tempFahrenheit = By.xpath(tempFahrenheitPath);
+		fahrenheit = isElementVisible(tempFahrenheit).getText();
+		
+		return fahrenheit;
+	}
+
 
 }

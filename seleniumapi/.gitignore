@@ -1,3 +1,9 @@
 /target/
 *.jar
 *.class
+*.html
+*.png
+*.xml
+*.css
+*.js
+*.gif

@@ -1,6 +1,7 @@
 package utils;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -82,5 +83,5 @@ public class ActionUtil {
 		Assert.assertNotNull("Element is not clickable " + inelement , element);
 		return element;
 	}
-
+	
 }
